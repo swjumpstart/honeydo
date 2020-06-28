@@ -1,9 +1,9 @@
 <?php namespace App\Controllers;
 
+	use CodeIgniter\Test\CIDatabaseTestCase;
 	use CodeIgniter\Test\ControllerTester;
-	use PHPUnit\Framework\TestCase;
 
-	class HomeTest extends TestCase
+	class HomeTest extends CIDatabaseTestCase
 	{
 		use ControllerTester;
 
@@ -18,6 +18,6 @@
 			$response = $this->withUri('http://whiskeybox.local/')
 							 ->controller(Home::class)
 							 ->execute('index');
-			$this->assertTrue($response->see('Welcome to CodeIgniter 4.0.3', 'h1'));
+			$this->assertTrue($response->see('HoneyDo List', 'h1'));
 		}
 	}
