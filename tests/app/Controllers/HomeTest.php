@@ -1,15 +1,23 @@
 <?php namespace App\Controllers;
 
-	use CodeIgniter\Test\CIUnitTestCase;
-	use PHPUnit\Framework\TestCase;
+	use CodeIgniter\Test\CIDatabaseTestCase;
+	use CodeIgniter\Test\ControllerTester;
 
-	class HomeTest extends TestCase
+	class HomeTest extends CIDatabaseTestCase
 	{
-		public function testTrueIsNotFalse() {
-			$this->assertNotEquals(true, false);
+		use ControllerTester;
+
+		public function testHomepage_returnsOkStatus(): void {
+			$response = $this->withUri('http://whiskeybox.local/')
+							 ->controller(Home::class)
+							 ->execute('index');
+			$this->assertTrue($response->isOK());
 		}
 
-		public function testTrueIsTrue() {
-			$this->assertEquals(true, true);
+		public function testHomepageTitle_returnsGivenText(): void {
+			$response = $this->withUri('http://whiskeybox.local/')
+							 ->controller(Home::class)
+							 ->execute('index');
+			$this->assertTrue($response->see('HoneyDo List', 'h1'));
 		}
 	}

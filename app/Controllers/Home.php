@@ -4,7 +4,11 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		$model = model('TaskModel');
+		$tasks = $model->findAll();
+		$data =  ['tasks' => $tasks];
+
+		return view('welcome_message', $data);
 	}
 
 	//--------------------------------------------------------------------
